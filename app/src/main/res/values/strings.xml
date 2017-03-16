@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">YouTube Subscriber Tile</string>
+    <string name="subscriber_count_tile_title">YouTube Subscriber Count</string>
+</resources>
