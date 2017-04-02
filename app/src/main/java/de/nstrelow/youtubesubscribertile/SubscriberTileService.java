@@ -32,7 +32,7 @@ public class SubscriberTileService extends TileService {
 
     @Override
     public void onStartListening() {
-        super.onStartListening();
+        getSubscribersCount();
     }
 
     @Override
