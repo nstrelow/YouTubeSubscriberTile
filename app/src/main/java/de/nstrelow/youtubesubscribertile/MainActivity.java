@@ -3,8 +3,8 @@ package de.nstrelow.youtubesubscribertile;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     public static final String USERNAME_PREF = "username";
     public static final String PREFERENCES_KEY = MainActivity.class.getPackage().getName();
 
+    private TextInputLayout inputLayoutKey, inputLayoutChannel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupUI() {
+        inputLayoutKey = (TextInputLayout) findViewById(R.id.input_layout_api_key);
+        inputLayoutChannel = (TextInputLayout) findViewById(R.id.input_layout_channel);
         Button saveKeyButton = (Button) findViewById(R.id.bt_save_api_key);
         final EditText apiKeyEditText = (EditText) findViewById(R.id.editText);
         apiKeyEditText.setText(getApiKey());
@@ -43,17 +47,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String apiKey = apiKeyEditText.getText().toString();
                 if (apiKey.isEmpty()) {
-                    Snackbar.make(findViewById(R.id.mainLayout),
-                            "Please insert an API key!", Snackbar.LENGTH_LONG).show();
+                    inputLayoutKey.setError(getString(R.string.err_msg_api_key));
                     return;
                 }
-
+                inputLayoutKey.setErrorEnabled(false);
                 SharedPreferences prefs = getApplicationContext()
                         .getSharedPreferences(PREFERENCES_KEY, MODE_PRIVATE);
 
                 prefs.edit().putString(API_KEY_PREF, apiKey).apply();
                 Snackbar.make(findViewById(R.id.mainLayout),
-                        "API Key saved!", Snackbar.LENGTH_SHORT).show();
+                        R.string.snack_api_key_saved, Snackbar.LENGTH_SHORT).show();
             }
         });
 
@@ -65,11 +68,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String username = channelEditText.getText().toString();
                 if (username.isEmpty()) {
-                    Snackbar.make(findViewById(R.id.mainLayout),
-                            "Please insert a channel name!", Snackbar.LENGTH_LONG).show();
+                    inputLayoutChannel.setError(getString(R.string.err_msg_channel_name));
                     return;
                 }
-
+                inputLayoutChannel.setErrorEnabled(false);
                 getChannelId(username);
             }
         });
@@ -89,13 +91,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void getChannelId(final String username) {
         String apiKey = getApiKey();
-        if(apiKey.isEmpty()) {
-            Snackbar.make(findViewById(R.id.mainLayout),
-                    "You need to enter the API Key before", Snackbar.LENGTH_SHORT).show();
+        if (apiKey.isEmpty()) {
+            inputLayoutChannel.setError(getString(R.string.err_api_key_first));
             return;
         }
-
-        final String[] channelId = {""};
+        inputLayoutChannel.setErrorEnabled(false);
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "https://www.googleapis.com/youtube/v3/channels?part=id" +
                 "&forUsername=" + username +
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                                     .getJSONObject(0)
                                     .getString("id");
 
-                            saveChannel(id,username);
+                            saveChannel(id, username);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
