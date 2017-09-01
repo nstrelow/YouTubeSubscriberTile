@@ -2,7 +2,7 @@
     <string name="app_name">YouTube Subscriber Tile</string>
     <string name="subscriber_count_tile_title">YouTube Subscriber Count</string>
 
-    <string name="hint_api_key">API key</string>
+    <string name="hint_api_key">YouTube API key</string>
     <string name="hint_user_name">YouTube channel name</string>
     <string name="btn_save">Save</string>
     <string name="err_msg_api_key">Please insert an API key</string>
