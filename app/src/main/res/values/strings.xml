@@ -9,7 +9,7 @@
     <string name="err_msg_channel_name">Please insert a channel name</string>
     <string name="snack_api_key_saved">API Key saved!</string>
     <string name="err_api_key_first">You need to enter the API Key first</string>
-    <string name="api_info_dialog_msg">A YouTube Data API Key is needed to retrieve channel information. Please acquire one by following the steps explained in the link below.</string>
+    <string name="api_info_dialog_msg">A YouTube Data API Key is needed to retrieve channel information. Please acquire one by following the steps 1 – 3 explained in the link below.</string>
     <string name="api_info_dialog_title">Get a YouTube API Key</string>
     <string name="api_info_dialog_open_button">Open API Guide</string>
     <string name="api_info_dialog_send_button">Send link</string>
