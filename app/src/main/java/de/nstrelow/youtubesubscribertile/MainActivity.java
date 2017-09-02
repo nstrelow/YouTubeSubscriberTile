@@ -1,10 +1,15 @@
 package de.nstrelow.youtubesubscribertile;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.ShareActionProvider;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -60,6 +65,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button apiInfoButton = (Button) findViewById(R.id.bt_info_api_key);
+        apiInfoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showApiInfoDialog();
+            }
+        });
+
         Button saveChannelButton = (Button) findViewById(R.id.bt_save_channel);
         final EditText channelEditText = (EditText) findViewById(R.id.editText2);
         channelEditText.setText(getUsername());
@@ -75,6 +88,35 @@ public class MainActivity extends AppCompatActivity {
                 getChannelId(username);
             }
         });
+    }
+
+    private void showApiInfoDialog() {
+        final String youtubeDataUrl = "https://developers.google.com/youtube/v3/getting-started";
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+        alertBuilder
+                .setTitle(R.string.api_info_dialog_title)
+                .setIcon(R.drawable.ic_info_outline)
+                .setMessage(R.string.api_info_dialog_msg)
+                .setPositiveButton(R.string.api_info_dialog_open_button, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        Intent i = new Intent(Intent.ACTION_VIEW);
+                        i.setData(Uri.parse(youtubeDataUrl));
+                        startActivity(i);
+                    }
+                })
+                .setNeutralButton(R.string.api_info_dialog_send_button, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                        sharingIntent.setType("text/plain");
+                        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, youtubeDataUrl);
+                        startActivity(Intent.createChooser(sharingIntent, getString(R.string.api_info_dialog_send_button)));
+                    }
+                });
+        AlertDialog alertDialog = alertBuilder.create();
+        alertDialog.show();
     }
 
     private String getApiKey() {
