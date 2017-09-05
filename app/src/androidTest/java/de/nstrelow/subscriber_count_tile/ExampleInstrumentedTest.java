@@ -1,4 +1,4 @@
-package de.nstrelow.youtubesubscribertile;
+package de.nstrelow.subscriber_count_tile;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("de.nstrelow.youtubesubscribertile", appContext.getPackageName());
+        assertEquals("de.nstrelow.subscriber_tile_for_youtube", appContext.getPackageName());
     }
 }

@@ -1,4 +1,4 @@
-package de.nstrelow.youtubesubscribertile;
+package de.nstrelow.subscriber_count_tile;
 
 import android.content.SharedPreferences;
 import android.service.quicksettings.Tile;

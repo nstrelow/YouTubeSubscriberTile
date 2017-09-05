@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="de.nstrelow.youtubesubscribertile">
+    package="de.nstrelow.subscriber_count_tile">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="de.nstrelow.subscriber_count_tile.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,8 +20,8 @@
         </activity>
 
         <service
-            android:name=".SubscriberTileService"
-            android:icon="@drawable/ic_youtube_play"
+            android:name="de.nstrelow.subscriber_count_tile.SubscriberTileService"
+            android:icon="@drawable/ic_people"
             android:label="@string/subscriber_count_tile_title"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>

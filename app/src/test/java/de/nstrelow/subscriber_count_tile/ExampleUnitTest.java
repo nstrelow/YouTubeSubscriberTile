@@ -1,4 +1,4 @@
-package de.nstrelow.youtubesubscribertile;
+package de.nstrelow.subscriber_count_tile;
 
 import org.junit.Test;
 
